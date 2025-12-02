@@ -10,38 +10,17 @@ Android 11+ wireless debugging tool with QR code pairing and auto-connect suppor
 
 ## Usage
 
-### 1. Pair Only (default)
 ```bash
-python main.py
+uv run main.py
 ```
-Scans QR code and pairs the device. No automatic connection.
 
-### 2. Pair and Connect
-```bash
-python main.py -p
-# or
-python main.py --pair-connect
-```
-After pairing successfully, prompts you to enter the connect port (default: 5555), then executes `adb connect ip:port`.
-
-### 3. Connect Only (skip pairing)
-```bash
-python main.py -c
-# or
-python main.py --connect
-```
-Scans QR code to read device IP, prompts for port, and connects directly without pairing. Use this when device is already paired.
-
-### 4. Help
-```bash
-python main.py -h
-```
+Scans QR code and pairs the device, then auto-connects.
 
 ## Steps
 
 1. Run the script with desired mode
 2. On your Android device:
-   - Go to **Developer options** ’ **Wireless debugging** ’ **Pair device with QR code**
+   - Go to **Developer options** ï¿½ **Wireless debugging** ï¿½ **Pair device with QR code**
 3. Scan the QR code displayed in terminal
 4. If using pair-connect or connect mode, enter the connection port when prompted
 5. Press Enter to exit
@@ -49,30 +28,27 @@ python main.py -h
 ## Requirements
 
 - Python 3.6+
+- uv
 - python-zeroconf
 - qrcode
 
 Install dependencies:
 ```bash
-pip install zeroconf qrcode
+uv sync
 ```
 
 ## Example
 
 ```bash
-# Pair and auto-connect
-$ python main.py -p
+$ uv run main.py
 [QR Code displayed]
-Mode: Pair and Connect
-Scan QR code to pair, then you'll be prompted for connect port.
+Scan QR code to pair and connect.
 [Developer options]-[Wireless debugging]-[Pair device with QR code]
 
 Service debug added.
 adb pair 192.168.1.100:37891 123456
 
 Pair successful!
-Enter connect port (default 5555): 5555
-
 Executing: adb connect 192.168.1.100:5555
 connected to 192.168.1.100:5555
 ```
